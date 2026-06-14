@@ -15,6 +15,7 @@
   --lang:#ff8a65;--langD:#bf360c;
   --mat:#4fc3f7;--matD:#0277bd;
   --sci:#69f0ae;--sciD:#00695c;
+  --esp:#ffab40;--espD:#e65100;
   --eng:#64b5f6;--engD:#1565c0;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -126,6 +127,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .world-card:hover{transform:translateY(-7px) scale(1.02);}
 .world-card.lang{background:linear-gradient(145deg,#4a0e00,#8d2b00);border-color:var(--lang);}
 .world-card.mat{background:linear-gradient(145deg,#003566,#01579b);border-color:var(--mat);}
+.world-card.esp{background:linear-gradient(145deg,#3e1f00,#bf360c);border-color:var(--esp);}
 .world-card.sci{background:linear-gradient(145deg,#003320,#00695c);border-color:var(--sci);}
 .world-card.eng{background:linear-gradient(145deg,#0a1628,#1565c0);border-color:var(--eng);}
 .wc-head{padding:24px 18px 16px;text-align:center;}
@@ -282,6 +284,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 @keyframes cardIn{from{opacity:0;transform:translateX(50px) scale(.88)}to{opacity:1;transform:translateX(0) scale(1)}}
 .flashcard.lang{background:linear-gradient(135deg,rgba(127,29,0,.75),rgba(191,54,12,.55));border:2px solid var(--lang);}
 .flashcard.mat{background:linear-gradient(135deg,rgba(0,53,102,.75),rgba(1,87,155,.55));border:2px solid var(--mat);}
+.flashcard.esp{background:linear-gradient(135deg,rgba(62,31,0,.75),rgba(191,54,12,.55));border:2px solid var(--esp);}
 .flashcard.sci{background:linear-gradient(135deg,rgba(0,51,32,.75),rgba(0,105,92,.55));border:2px solid var(--sci);}
 .flashcard.eng{background:linear-gradient(135deg,rgba(10,22,40,.75),rgba(21,101,192,.55));border:2px solid var(--eng);}
 .fc-num{font-family:'Courier New',monospace;font-size:9px;font-weight:bold;color:rgba(255,255,255,.3);margin-bottom:10px;}
@@ -302,6 +305,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .q-prog-fill{height:100%;border-radius:7px;transition:width .5s;}
 .q-prog-fill.lang{background:linear-gradient(90deg,var(--langD),var(--lang));}
 .q-prog-fill.mat{background:linear-gradient(90deg,var(--matD),var(--mat));}
+.q-prog-fill.esp{background:linear-gradient(90deg,var(--espD),var(--esp));}
 .q-prog-fill.sci{background:linear-gradient(90deg,var(--sciD),var(--sci));}
 .q-prog-fill.eng{background:linear-gradient(90deg,var(--engD),var(--eng));}
 .type-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);
@@ -569,7 +573,21 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   </nav>
 </div>
 
-<!-- No Champions Screen -->
+<!-- MI PROGRESO SCREEN -->
+<div id="s-champs" class="screen">
+  <div class="topbar"><div class="tb-name">📊 MI PROGRESO</div></div>
+  <div class="scroll-area" style="padding-bottom:80px;">
+    <div style="padding:16px;max-width:700px;margin:0 auto;width:100%;" id="progresoInner">
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <button class="nav-btn" onclick="navTo('mundos')"><span class="nav-icon">🗺️</span><span class="nav-lbl">MUNDOS</span></button>
+    <button class="nav-btn active"><span class="nav-icon">📊</span><span class="nav-lbl">PROGRESO</span></button>
+    <button class="nav-btn" onclick="navTo('logros')"><span class="nav-icon">🏅</span><span class="nav-lbl">LOGROS</span></button>
+    <button class="nav-btn" onclick="navTo('perfil')"><span class="nav-icon">👤</span><span class="nav-lbl">PERFIL</span></button>
+  </nav>
+</div>
+
 <!-- ACHIEVEMENTS -->
 <div id="s-logros" class="screen">
   <div class="topbar"><div class="tb-name">🏅 MIS LOGROS</div></div>
@@ -688,6 +706,7 @@ var AVATARS = [
 ];
 
 var SUBJS = {
+  esp:{name:'Español',icon:'📖',color:'var(--esp)',cls:'esp'},
   sci:{name:'Ciencias',icon:'🔬',color:'var(--sci)',cls:'sci'},
   eng:{name:'English',icon:'🇺🇸',color:'var(--eng)',cls:'eng'},
 };
@@ -981,15 +1000,35 @@ eng:[
    concept:'Present Perfect: ALREADY & YET ✅',emoji:'🍽️',explain:'',example:''},
 
   {id:'e26',type:'reorder',q:'Put the words in order:',letters:['finished','you','yet','Have','?'],answer:'Have you finished yet ?',
-   concept:'Present Perfect: ALREADY & YET ✅',emoji:'❓',explain:'',example:''},
+   concept:'Present Perfect: ALREADY & YET ✅',emoji:'❓',explain:'',example:''}
+],
+esp:[
+  {id:'p1',type:'mc',q:'¿Qué son las leyendas?',opts:['Textos informativos sobre historia','Relatos que forman parte de la identidad cultural usados para explicar fenómenos','Poemas tradicionales'],ans:1,concept:'Leyendas 🌙',emoji:'🌙',explain:'Las leyendas forman parte de la identidad cultural. Los humanos las usaban para explicar fenómenos naturales o sobrenaturales.',example:'La Llorona, el Chupacabras son leyendas mexicanas! 👻'},
+  {id:'p2',type:'mc',q:'¿En qué se divide la estructura de un texto dramático?',opts:['Introducción, desarrollo y conclusión','Actos y escenas','Estrofas y versos'],ans:1,concept:'Texto Dramático 🎭',emoji:'🎭',explain:'Un texto dramático tiene estructura especial que se divide en ACTOS y ESCENAS.',example:'Una obra de teatro: Acto 1 Escena 1, 2, 3... Acto 2... 🎪'},
+  {id:'p3',type:'mc',q:'¿A qué género pertenece el cuento?',opts:['Género lírico','Género dramático','Género narrativo'],ans:2,concept:'El Cuento 📖',emoji:'📚',explain:'El cuento pertenece al género NARRATIVO. Su cualidad principal es ser más breve en argumentos que la novela.',example:'Caperucita Roja: breve, con narrador y personajes. 🐺'},
+  {id:'p4',type:'mc',q:'¿Qué es un microrrelato?',opts:['Una novela muy larga','Historia con toda la estructura pero pocas palabras, economizan personajes y descripciones para concentrarse en el suceso','Un tipo de poema'],ans:1,concept:'Microrrelato ✏️',emoji:'✏️',explain:'El microrrelato es una historia muy corta con todos los elementos narrativos pero muy pocas palabras.',example:'Cuando desperté, el dinosaurio todavía estaba allí. ¡Microrrelato! 🦕'},
+  {id:'p5',type:'mc',q:'¿De qué se vale una obra teatral?',opts:['De imágenes y fotografías','De un texto o guión dramático que refiere los diálogos, mimos y acciones de los personajes','De música únicamente'],ans:1,concept:'Obra Teatral 🎭',emoji:'🎪',explain:'La obra teatral se vale de un texto o guión dramático que describe diálogos, gestos y acciones de los personajes.',example:'(El personaje entra corriendo) ← acotación que indica la acción. 🏃'},
+  {id:'p6',type:'mc',q:'¿Cuál es la característica principal de los textos literarios?',opts:['Tienen finalidad informativa','Se caracterizan por finalidad estética y artística más que informativa o funcional','Son siempre muy largos'],ans:1,concept:'Textos Literarios 📚',emoji:'🎨',explain:'Los textos literarios buscan crear belleza y arte más que informar.',example:'Una novela emociona. Un manual informa. ¡Esa es la diferencia! 📖'},
+  {id:'p7',type:'mc',q:'¿Cuáles son las partes del cuento?',opts:['Introducción, nudo y desenlace','Tema, estructura, personajes, narrador y espacio','Actos, escenas y acotaciones'],ans:1,concept:'Partes del Cuento 📖',emoji:'📖',explain:'Las partes del cuento son: tema, estructura, personajes, narrador y espacio.',example:'En Caperucita: tema=peligro, personajes=niña y lobo, espacio=bosque. 🌲'},
+  {id:'p8',type:'mc',q:'¿Qué es lo real en la literatura?',opts:['Lo que imagina el autor','Lo que puedes ver, tocar y sentir','Lo que solo existe en los sueños'],ans:1,concept:'Lo Real y lo Imaginario 🌟',emoji:'🌟',explain:'Lo real es lo que puedes ver, tocar y sentir. Lo imaginario es la creatividad del autor.',example:'Una piedra = real. Un dragón = imaginario. En la literatura se mezclan! 🐉'},
+  {id:'p9',type:'mc',q:'¿Qué es la poesía?',opts:['Género narrativo que cuenta historias largas','Género literario caracterizado por exaltar los sentimientos, emociones y pensamientos del autor','Un tipo de obra teatral'],ans:1,concept:'La Poesía 🎵',emoji:'🎵',explain:'La poesía es un género literario que exalta los sentimientos, emociones y pensamientos del autor.',example:'Los poemas de Neruda expresan emociones profundas! 💜'},
+  {id:'p10',type:'mc',q:'¿Qué es la novela?',opts:['Un poema muy largo','Género literario que narra una historia extensa dividida en capítulos enfocada en uno o más personajes','Un tipo de obra de teatro'],ans:1,concept:'La Novela 📚',emoji:'📚',explain:'La novela es un género literario que narra una historia extensa dividida en capítulos.',example:'Harry Potter, Don Quijote son novelas con muchos capítulos! 🧙'},
+  {id:'p11',type:'mc',q:'¿Cuántas lenguas nacionales se hablan en México?',opts:['50','69','100'],ans:1,concept:'Lenguas Indígenas 🇲🇽',emoji:'🗣️',explain:'En México se hablan 69 lenguas nacionales: 68 indígenas y el español. Existen 11 familias lingüísticas.',example:'Náhuatl, Maya, Zapoteco... son algunas de las 68 lenguas indígenas! 🌮'},
+  {id:'p12',type:'fill',q:'En México se hablan ___ lenguas nacionales (68 indígenas y el español).',ans:'69',altAns:['sesenta y nueve'],concept:'Lenguas Indígenas 🇲🇽',emoji:'🗣️',explain:'69 lenguas nacionales: 68 lenguas indígenas + el español = 69 en total.',example:'Mexico es uno de los paises con mas diversidad lingüística! 🌎'},
+  {id:'p13',type:'mc',q:'¿Qué son las manifestaciones artísticas?',opts:['Solo pinturas y esculturas','Expresiones creativas que buscan generar experiencia estética y emocional en quien las ve, escucha o experimenta','Únicamente música y danza'],ans:1,concept:'Manifestaciones Artísticas 🎨',emoji:'🎨',explain:'Las manifestaciones artísticas son expresiones creativas que generan experiencia estética y emocional.',example:'Una pintura, una canción, una obra de teatro son manifestaciones artísticas! 🎭'},
+  {id:'p14',type:'mc',q:'¿Qué es un recital?',opts:['Una exposición de pintura','Espectáculo donde se interpretan o recitan composiciones literarias como poemas, cuentos u obras de teatro','Una competencia de baile'],ans:1,concept:'El Recital 🎤',emoji:'🎤',explain:'Un recital es un espectáculo donde se interpretan o recitan composiciones literarias.',example:'Un recital de poesía donde los alumnos recitan sus poemas favoritos. 🎤'},
+  {id:'p15',type:'mc',q:'¿Cuáles son los tipos de manifestaciones artísticas?',opts:['Solo música y pintura','Música, danza, teatro, literatura, artes plásticas, vestimenta y tradiciones orales','Únicamente artes visuales'],ans:1,concept:'Tipos de Manifestaciones Artísticas 🎭',emoji:'🌈',explain:'Los tipos son: música, danza, teatro, literatura, artes plásticas, vestimenta y tradiciones orales.',example:'El folclor mexicano incluye música, danza, ropa tradicional y leyendas! 💃'},
+  {id:'p16',type:'mc',q:'¿Cuál es la estructura INTERNA de una obra?',opts:['Personajes, diálogos y escenas','Exposición, nudo y desenlace','Actos, escenas y acotaciones'],ans:1,concept:'Estructura Interna 📐',emoji:'📐',explain:'La estructura INTERNA: exposición (inicio), nudo (problema) y desenlace (solución).',example:'Exposición: Habia una vez... Nudo: De repente... Desenlace: Y colorin colorado... 🎯'},
+  {id:'p17',type:'mc',q:'¿Cuál es la estructura EXTERNA de una obra?',opts:['Exposición, nudo y desenlace','Personajes, diálogos, escenas y acotaciones','Tema, narrador y espacio'],ans:1,concept:'Estructura Externa 🎭',emoji:'🎪',explain:'La estructura EXTERNA: personajes, diálogos, escenas y acotaciones.',example:'Personajes hablan (diálogos), en diferentes partes (escenas), con instrucciones (acotaciones). 🎭'},
+  {id:'p18',type:'mc',q:'¿Cuáles son ejemplos de textos literarios?',opts:['Periódico, revista y manual','Novela, ensayo y obra de teatro','Carta, correo y receta'],ans:1,concept:'Ejemplos de Textos Literarios 📚',emoji:'📚',explain:'Los textos literarios incluyen: novela, ensayo, obra de teatro, cuento, poesía, microrrelato y leyenda.',example:'Harry Potter (novela), Romeo y Julieta (obra de teatro), La Ilíada (poema). 📖'},
 ]
-};;
+};
 
 // ════════════════════════════════
 // STATE
 // ════════════════════════════════
 var player = {name:'', av:'🎮', avIdx:-1};
-var save = {xp:0,level:0,coins:0,total:0,perfectQ:0,maxStreak:0,pracSess:0,unlocked:[],subjPlayed:[],pracDone:{sci:false,eng:false},streak:0,lastPlay:null};
+var save = {xp:0,level:0,coins:0,total:0,perfectQ:0,maxStreak:0,pracSess:0,unlocked:[],subjPlayed:[],pracDone:{esp:false,sci:false,eng:false},streak:0,lastPlay:null};
 var mode='', curSubj='';
 var cq=0, cqs=[], sesCoins=0, sesCorrect=0, cStreak=0, answered=false;
 var timerInt=null, timerSecs=0;
@@ -1179,10 +1218,9 @@ function updateChamps() {
 
   // Subj scores from save
   var subjScores = {
-    lang: save.ah_score_lang || 0,
-    mat:  save.ah_score_mat  || 0,
-    sci:  save.ah_score_sci  || 0,
-    eng:  save.ah_score_eng  || 0,
+    esp: save.ah_score_esp || 0,
+    sci: save.ah_score_sci || 0,
+    eng: save.ah_score_eng || 0,
   };
 
   // HERO CARD
@@ -1206,7 +1244,7 @@ function updateChamps() {
   '</div>';
 
   // RANKS PER SUBJECT
-  var subjDefs = {lang:{n:'Lenguajes',i:'📝'},mat:{n:'Matemáticas',i:'🔢'},sci:{n:'Ciencias',i:'🌿'},eng:{n:'English',i:'🇺🇸'}};
+  var subjDefs = {esp:{n:'Español',i:'📖'},sci:{n:'Ciencias',i:'🔬'},eng:{n:'English',i:'🇺🇸'}};
   var ranksHtml = '<div style="font-family:Courier New,monospace;font-size:10px;font-weight:900;color:rgba(255,255,255,.4);margin-bottom:10px;letter-spacing:1px;">🎖️ RANGO POR MATERIA</div>'+
     '<div class="rank-grid">';
   Object.keys(subjDefs).forEach(function(k){
@@ -1300,8 +1338,9 @@ function updSubjScore(subj, coins) {
 // MINI-CLASS BUILDERS PER SUBJECT
 // ════════════════════════════════
 function buildSubjMiniClass(subj) {
-  if(subj==='eng') return buildEngMiniClass();
+  if(subj==='esp') return buildEspMiniClass();
   if(subj==='sci') return buildSciMiniClass();
+  if(subj==='eng') return buildEngMiniClass();
   return [];
 }
 
@@ -1391,6 +1430,230 @@ function buildMatMiniClass() {
     )
   ];
 }
+
+function buildEspMiniClass() {
+  function slide(emoji,concept,question,options,correctIdx,explanation){
+    var optsHtml='';
+    if(options&&options.length){
+      optsHtml='<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">'+
+        options.map(function(o,i){
+          var ok=i===correctIdx;
+          return '<div style="background:'+(ok?'rgba(0,230,118,.15)':'rgba(255,255,255,.06)')+
+            ';border:2px solid '+(ok?'var(--g)':'rgba(255,255,255,.15)')+
+            ';border-radius:8px;padding:9px 12px;font-size:13px;font-weight:800;'+
+            'color:'+(ok?'#b9ffda':'rgba(255,255,255,.7)')+
+            ';display:flex;align-items:center;gap:8px;">'+
+            '<span style="font-family:Courier New,monospace;font-size:10px;background:rgba(255,255,255,.1);border-radius:4px;padding:2px 6px;">'+String.fromCharCode(65+i)+'</span>'+o+
+            (ok?' <span style="margin-left:auto;">✅</span>':'')+
+            '</div>';
+        }).join('')+'</div>';
+    }
+    return {cardType:'grammar',concept:concept,emoji:emoji,
+      html:'<div style="display:flex;flex-direction:column;gap:10px;width:100%;">'+
+        '<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,171,64,.4);border-radius:12px;padding:14px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:8px;letter-spacing:1px;">📋 REACTIVO DE LA GUÍA</div>'+
+        '<div style="font-size:15px;font-weight:900;color:white;line-height:1.5;">'+question+'</div>'+
+        optsHtml+'</div>'+
+        '<div style="background:rgba(255,171,64,.08);border:2px solid rgba(255,171,64,.25);border-radius:12px;padding:12px 14px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:7px;letter-spacing:1px;">💡 EXPLICACIÓN</div>'+
+        explanation+'</div></div>'};
+  }
+  function card(emoji,concept,html){return {cardType:'grammar',concept:concept,emoji:emoji,html:html};}
+  function sec(title,color,body){return '<div style="background:'+color+'11;border:2px solid '+color+'44;border-radius:10px;padding:10px 12px;margin-bottom:8px;"><div style="font-family:Courier New,monospace;font-size:9px;font-weight:900;color:'+color+';margin-bottom:7px;letter-spacing:1px;">'+title+'</div>'+body+'</div>';}
+  function tag(text,color){return '<span style="background:'+color+'22;border:2px solid '+color+';border-radius:20px;padding:4px 11px;font-size:12px;font-weight:900;color:'+color+';">'+text+'</span>';}
+
+  return [
+
+    // ── SLIDE 1: LEYENDAS ──
+    slide('🌙','Leyendas',
+      '¿Qué son las leyendas y para qué las usaban los humanos?',
+      ['Son textos informativos sobre historia','Forman parte de la identidad cultural; los humanos las usaban para explicar fenómenos','Son poemas tradicionales'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      '<div style="background:rgba(255,171,64,.1);border:2px solid rgba(255,171,64,.3);border-radius:10px;padding:12px;">'+
+        '<div style="font-size:14px;font-weight:800;color:white;line-height:1.8;">'+
+        '🌙 Las leyendas forman parte de la <span style="color:var(--esp);">identidad cultural</span> de los pueblos.<br>'+
+        '📖 Son relatos que los humanos usaban para <span style="color:var(--esp);">explicar fenómenos</span> naturales o sobrenaturales.<br>'+
+        '🗣️ Se transmiten de generación en generación de forma <span style="color:var(--esp);">oral o escrita</span>.</div></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">'+
+      '<div style="background:rgba(0,0,0,.25);border-radius:8px;padding:9px;"><div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:4px;">🇲🇽 EJEMPLOS MEXICANOS</div><div style="font-size:13px;color:white;font-weight:800;line-height:1.8;">👻 La Llorona<br>🐉 La Serpiente emplumada<br>🦷 El Chupacabras</div></div>'+
+      '<div style="background:rgba(0,0,0,.25);border-radius:8px;padding:9px;"><div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:4px;">⚡ EXPLICABAN...</div><div style="font-size:13px;color:white;font-weight:800;line-height:1.8;">🌋 Erupciones<br>🌧️ La lluvia<br>🌑 Los eclipses</div></div>'+
+      '</div></div>'
+    ),
+
+    // ── SLIDE 2: TEXTO DRAMÁTICO Y OBRA TEATRAL ──
+    slide('🎭','Texto Dramático y Obra Teatral',
+      '¿En qué se divide la estructura especial de un texto dramático?',
+      ['Introducción, desarrollo y conclusión','Actos y escenas','Estrofas y versos'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      sec('🎭 TEXTO DRAMÁTICO','var(--esp)',
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.8;">'+
+        'Un texto dramático tiene estructura especial: se divide en <span style="color:var(--y);">ACTOS</span> y <span style="color:var(--y);">ESCENAS</span>.</div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px;">'+
+        '<div style="background:rgba(255,214,0,.1);border:1px solid rgba(255,214,0,.3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:22px;margin-bottom:3px;">🎬</div><div style="font-family:Courier New,monospace;font-size:9px;color:var(--y);">ACTO</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Parte grande de la obra</div></div>'+
+        '<div style="background:rgba(255,214,0,.1);border:1px solid rgba(255,214,0,.3);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:22px;margin-bottom:3px;">🎪</div><div style="font-family:Courier New,monospace;font-size:9px;color:var(--y);">ESCENA</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Subdivisión del acto</div></div>'+
+        '</div>'
+      )+
+      sec('🎪 OBRA TEATRAL','var(--pu)',
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.8;">'+
+        'Se vale de un texto o <span style="color:var(--pu);">guión dramático</span> que refiere:<br>'+
+        '💬 Los <span style="color:var(--pu);">diálogos</span> de los personajes<br>'+
+        '🤸 Los <span style="color:var(--pu);">mimos</span> (gestos y movimientos)<br>'+
+        '🏃 Las <span style="color:var(--pu);">acciones</span> de los personajes</div>'
+      )+'</div>'
+    ),
+
+    // ── SLIDE 3: EL CUENTO ──
+    slide('📖','El Cuento y sus Partes',
+      '¿A qué género pertenece el cuento y cuáles son sus partes?',
+      ['Género lírico. Partes: estrofas y versos','Género narrativo. Partes: tema, estructura, personajes, narrador y espacio','Género dramático. Partes: actos y escenas'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      sec('📖 EL CUENTO','var(--esp)',
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.8;">'+
+        '📚 Pertenece al <span style="color:var(--esp);">género NARRATIVO</span><br>'+
+        '✂️ Su principal cualidad: es más <span style="color:var(--esp);">breve en argumentos</span> que la novela</div>'
+      )+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">'+
+      [{ico:'💡',n:'TEMA',d:'De qué trata la historia',c:'var(--y)'},{ico:'🏗️',n:'ESTRUCTURA',d:'Inicio, nudo y desenlace',c:'var(--y)'},{ico:'👥',n:'PERSONAJES',d:'Quienes participan',c:'var(--eng)'},{ico:'🗣️',n:'NARRADOR',d:'Quien cuenta la historia',c:'var(--eng)'},{ico:'🏠',n:'ESPACIO',d:'Donde sucede la historia',c:'var(--sci)'}].map(function(p){
+        return '<div style="background:rgba(255,255,255,.06);border:2px solid '+p.c+'44;border-radius:8px;padding:8px;display:flex;align-items:center;gap:8px;"><span style="font-size:22px;">'+p.ico+'</span><div><div style="font-family:Courier New,monospace;font-size:9px;color:'+p.c+';">'+p.n+'</div><div style="font-size:11px;color:rgba(255,255,255,.7);font-weight:700;margin-top:2px;">'+p.d+'</div></div></div>';
+      }).join('')+
+      '</div></div>'
+    ),
+
+    // ── SLIDE 4: MICRORRELATO ──
+    card('✏️','El Microrrelato',
+      '<div style="display:flex;flex-direction:column;gap:8px;width:100%;">'+
+      '<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,171,64,.4);border-radius:12px;padding:14px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:8px;">✏️ ¿QUÉ ES EL MICRORRELATO?</div>'+
+        '<div style="font-size:15px;font-weight:900;color:white;line-height:1.5;">Es una historia con toda la estructura narrativa pero muy pocas palabras</div></div>'+
+      '<div style="background:rgba(255,171,64,.08);border:2px solid rgba(255,171,64,.25);border-radius:12px;padding:12px 14px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:7px;">📋 CARACTERÍSTICAS</div>'+
+        '<div style="display:flex;flex-direction:column;gap:6px;">'+
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.8;">'+
+        '✂️ Se <span style="color:var(--esp);">economizan</span> personajes, circunstancias y descripciones<br>'+
+        '🎯 Se concentra más en el <span style="color:var(--esp);">suceso</span> (lo que pasa)<br>'+
+        '📖 Tiene todos los elementos: tema, narrador, personajes, espacio</div>'+
+        '<div style="background:rgba(0,0,0,.3);border-radius:8px;padding:10px;margin-top:4px;">'+
+          '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--y);margin-bottom:5px;">🌟 EJEMPLO FAMOSO</div>'+
+          '<div style="font-size:15px;font-weight:900;color:var(--y);font-style:italic;line-height:1.6;">"Cuando desperté, el dinosaurio todavía estaba allí."</div>'+
+          '<div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;">— Augusto Monterroso (¡solo 7 palabras!)</div>'+
+        '</div></div></div></div>'
+    ),
+
+    // ── SLIDE 5: GÉNEROS LITERARIOS (Novela y Poesía) ──
+    slide('📚','Géneros Literarios: Novela y Poesía',
+      '¿Qué es la poesía?',
+      ['Un género narrativo que cuenta historias','Género literario que exalta los sentimientos, emociones y pensamientos del autor','Un tipo de obra teatral'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      '<div style="background:rgba(213,0,249,.1);border:2px solid rgba(213,0,249,.3);border-radius:10px;padding:11px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--pu);margin-bottom:5px;">🎵 POESÍA — Género LÍRICO</div>'+
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.7;">Género literario que <span style="color:var(--pu);">exalta los sentimientos, emociones y pensamientos</span> del autor.<br><span style="font-size:11px;color:rgba(255,255,255,.5);">Ejemplos: Oda a la alegría, poemas de Neruda 💜</span></div>'+
+      '</div>'+
+      '<div style="background:rgba(100,181,246,.1);border:2px solid rgba(100,181,246,.3);border-radius:10px;padding:11px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--eng);margin-bottom:5px;">📚 NOVELA — Género NARRATIVO</div>'+
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.7;">Género literario que narra una <span style="color:var(--eng);">historia extensa dividida en capítulos</span>, desarrollada en un periodo determinado, enfocada en uno o más personajes.<br><span style="font-size:11px;color:rgba(255,255,255,.5);">Ejemplos: Harry Potter, Don Quijote 🧙</span></div>'+
+      '</div>'+
+      '<div style="background:rgba(255,171,64,.1);border:2px solid rgba(255,171,64,.3);border-radius:10px;padding:11px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:5px;">🎭 OBRA TEATRAL — Género DRAMÁTICO</div>'+
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.7;">Se representa en escenario. Tiene diálogos, actos y escenas.<br><span style="font-size:11px;color:rgba(255,255,255,.5);">Ejemplos: Romeo y Julieta, obras del colegio 🎪</span></div>'+
+      '</div></div>'
+    ),
+
+    // ── SLIDE 6: LO REAL Y LO IMAGINARIO ──
+    card('🌟','Lo Real y lo Imaginario',
+      '<div style="display:flex;flex-direction:column;gap:8px;width:100%;">'+
+      '<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,171,64,.4);border-radius:12px;padding:14px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:8px;">🌟 LO REAL Y LO IMAGINARIO EN LITERATURA</div>'+
+        '<div style="font-size:15px;font-weight:900;color:white;line-height:1.5;">¿Cuál es la diferencia entre lo real y lo imaginario?</div></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+      '<div style="background:rgba(0,230,118,.1);border:2px solid rgba(0,230,118,.3);border-radius:10px;padding:11px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--g);margin-bottom:6px;">👁️ LO REAL</div>'+
+        '<div style="font-size:13px;color:white;font-weight:800;line-height:1.9;">Lo que puedes:<br>👀 <span style="color:var(--g);">Ver</span><br>🤲 <span style="color:var(--g);">Tocar</span><br>💚 <span style="color:var(--g);">Sentir</span><br><br><span style="font-size:11px;color:rgba(255,255,255,.5);">Una piedra, el viento, el sol</span></div>'+
+      '</div>'+
+      '<div style="background:rgba(213,0,249,.1);border:2px solid rgba(213,0,249,.3);border-radius:10px;padding:11px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--pu);margin-bottom:6px;">✨ LO IMAGINARIO</div>'+
+        '<div style="font-size:13px;color:white;font-weight:800;line-height:1.9;">La <span style="color:var(--pu);">creatividad</span>:<br>🐉 Dragones<br>🧙 Magia<br>🌈 Mundos fantásticos<br><br><span style="font-size:11px;color:rgba(255,255,255,.5);">La mayoría viene de la mente</span></div>'+
+      '</div></div>'+
+      '<div style="background:rgba(255,171,64,.08);border:2px solid rgba(255,171,64,.25);border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:800;color:white;">💡 En la literatura se <span style="color:var(--esp);">mezclan</span> lo real y lo imaginario para crear historias increíbles</div>'+
+      '</div>'
+    ),
+
+    // ── SLIDE 7: TEXTOS LITERARIOS ──
+    slide('🎨','Textos Literarios',
+      '¿Cuál es la característica principal de los textos literarios?',
+      ['Tienen finalidad informativa o funcional','Se caracterizan por finalidad estética y artística más que informativa','Son siempre muy largos'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+      '<div style="background:rgba(255,171,64,.12);border:2px solid rgba(255,171,64,.35);border-radius:10px;padding:10px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--esp);margin-bottom:5px;">📚 LITERARIOS</div>'+
+        '<div style="font-size:12px;color:white;font-weight:700;line-height:1.7;">🎨 Finalidad <span style="color:var(--esp);">estética y artística</span><br>😊 Buscan emocionar<br>✨ Novela, cuento, poesía, ensayo, obra de teatro</div>'+
+      '</div>'+
+      '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:rgba(255,255,255,.35);margin-bottom:5px;">📰 NO LITERARIOS</div>'+
+        '<div style="font-size:12px;color:rgba(255,255,255,.5);font-weight:700;line-height:1.7;">ℹ️ Finalidad informativa<br>📋 Buscan informar<br>📖 Periódico, manual, receta, carta</div>'+
+      '</div></div>'+
+      '<div style="background:rgba(0,0,0,.25);border-radius:8px;padding:10px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--y);margin-bottom:5px;">📚 EJEMPLOS DE TEXTOS LITERARIOS</div>'+
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;">'+
+        ['📚 Novela','📝 Ensayo','🎭 Obra de teatro','📖 Cuento','🎵 Poesía','✏️ Microrrelato','🌙 Leyenda'].map(function(t){
+          return '<span style="background:rgba(255,171,64,.12);border:1px solid rgba(255,171,64,.3);border-radius:7px;padding:4px 9px;font-size:12px;font-weight:800;color:white;">'+t+'</span>';
+        }).join('')+
+        '</div></div></div>'
+    ),
+
+    // ── SLIDE 8: LENGUAS INDÍGENAS ──
+    slide('🇲🇽','Lenguas Indígenas de México',
+      '¿Cuántas lenguas nacionales se hablan en México?',
+      ['50 lenguas','69 lenguas (68 indígenas + español)','100 lenguas'],1,
+      '<div style="display:flex;flex-direction:column;gap:8px;">'+
+      '<div style="background:rgba(255,171,64,.1);border:2px solid rgba(255,171,64,.35);border-radius:12px;padding:14px;text-align:center;">'+
+        '<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">'+
+        '<div style="text-align:center;"><div style="font-family:Courier New,monospace;font-size:36px;font-weight:900;color:var(--esp);">69</div><div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:800;">Lenguas nacionales</div></div>'+
+        '<div style="text-align:center;"><div style="font-family:Courier New,monospace;font-size:36px;font-weight:900;color:var(--y);">68</div><div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:800;">Lenguas indígenas</div></div>'+
+        '<div style="text-align:center;"><div style="font-family:Courier New,monospace;font-size:36px;font-weight:900;color:var(--g);">11</div><div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:800;">Familias lingüísticas</div></div>'+
+        '</div></div>'+
+      '<div style="background:rgba(0,0,0,.25);border-radius:8px;padding:10px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--y);margin-bottom:6px;">🌿 ALGUNAS LENGUAS INDÍGENAS DE MÉXICO</div>'+
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;">'+
+        ['🌽 Náhuatl','🌴 Maya','🏔️ Zapoteco','🦋 Mixteco','🌊 Totonaco','🌿 Otomí'].map(function(l){
+          return '<span style="background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.3);border-radius:7px;padding:4px 9px;font-size:12px;font-weight:800;color:white;">'+l+'</span>';
+        }).join('')+
+        '</div></div>'+
+      '<div style="background:rgba(255,171,64,.08);border:2px solid rgba(255,171,64,.25);border-radius:8px;padding:9px;font-size:13px;font-weight:800;color:white;">🇲🇽 México es uno de los países con <span style="color:var(--esp);">mayor diversidad lingüística</span> del mundo!</div>'+
+      '</div>'
+    ),
+
+    // ── SLIDE 9: MANIFESTACIONES ARTÍSTICAS ──
+    card('🎨','Manifestaciones Artísticas',
+      '<div style="display:flex;flex-direction:column;gap:8px;width:100%;">'+
+      sec('🎨 ¿QUÉ SON?','var(--esp)',
+        '<div style="font-size:13px;font-weight:800;color:white;line-height:1.7;">Son <span style="color:var(--esp);">expresiones creativas</span> que buscan generar una experiencia <span style="color:var(--esp);">estética y emocional</span> en quien las ve, escucha o experimenta.</div>'
+      )+
+      sec('🌈 TIPOS DE MANIFESTACIONES ARTÍSTICAS','var(--y)',
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">'+
+        ['🎵 Música','💃 Danza','🎭 Teatro','📚 Literatura','🎨 Artes plásticas','👘 Vestimenta','🗣️ Tradiciones orales'].map(function(t){
+          return '<div style="background:rgba(255,214,0,.1);border:1px solid rgba(255,214,0,.25);border-radius:7px;padding:6px 9px;font-size:12px;font-weight:800;color:white;">'+t+'</div>';
+        }).join('')+'</div>'
+      )+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">'+
+      '<div style="background:rgba(100,181,246,.1);border:2px solid rgba(100,181,246,.3);border-radius:10px;padding:9px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--eng);margin-bottom:5px;">🎤 RECITAL</div>'+
+        '<div style="font-size:12px;color:white;font-weight:700;line-height:1.6;">Espectáculo donde se recitan: poemas, cuentos, obras de teatro o canciones</div>'+
+      '</div>'+
+      '<div style="background:rgba(0,230,118,.1);border:2px solid rgba(0,230,118,.3);border-radius:10px;padding:9px;">'+
+        '<div style="font-family:Courier New,monospace;font-size:9px;color:var(--g);margin-bottom:5px;">📐 ESTRUCTURA INTERNA</div>'+
+        '<div style="font-size:12px;color:white;font-weight:700;line-height:1.6;">🌅 Exposición<br>⚡ Nudo<br>🌟 Desenlace</div>'+
+      '</div></div>'+
+      sec('🎭 ESTRUCTURA EXTERNA DE LA OBRA','var(--pu)',
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;">'+
+        ['👥 Personajes','💬 Diálogos','🎬 Escenas','📋 Acotaciones'].map(function(e){
+          return '<span style="background:rgba(213,0,249,.12);border:1px solid rgba(213,0,249,.3);border-radius:7px;padding:5px 10px;font-size:13px;font-weight:800;color:white;">'+e+'</span>';
+        }).join('')+'</div>'
+      )+'</div>'
+    ),
+
+  ];
+}
+
 
 function buildSciMiniClass() {
   function slide(emoji,concept,question,options,correctIdx,explanation){
